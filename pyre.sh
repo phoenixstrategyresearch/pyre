@@ -345,6 +345,7 @@ UNIT
     install)
         echo "Installing pyre hooks into Claude Code..."
 
+        mkdir -p "$(dirname "$SETTINGS_FILE")"
         if [[ ! -f "$SETTINGS_FILE" ]]; then
             echo '{}' > "$SETTINGS_FILE"
         fi
