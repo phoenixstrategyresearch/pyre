@@ -356,14 +356,17 @@ UNIT
             exit 1
         fi
         "$PYTHON" -c "
-import json, sys
+import json, sys, os
 
-with open('$SETTINGS_FILE') as f:
+settings_file = os.path.expanduser('~/.claude/settings.json')
+backup_script = sys.argv[1]
+
+with open(settings_file) as f:
     settings = json.load(f)
 
 hook_entry = [{
     'matcher': '',
-    'hooks': [{'type': 'command', 'command': '$BACKUP_SCRIPT'}]
+    'hooks': [{'type': 'command', 'command': backup_script}]
 }]
 
 if 'hooks' not in settings:
@@ -372,10 +375,10 @@ if 'hooks' not in settings:
 settings['hooks']['PostToolUse'] = hook_entry
 settings['hooks']['Stop'] = hook_entry
 
-with open('$SETTINGS_FILE', 'w') as f:
+with open(settings_file, 'w') as f:
     json.dump(settings, f, indent=2)
     f.write('\n')
-"
+" "$BACKUP_SCRIPT"
         echo "Done. Hooks added to $SETTINGS_FILE"
         echo ""
         echo "pyre will now auto-backup sessions on every tool use and when Claude stops."
@@ -394,9 +397,11 @@ with open('$SETTINGS_FILE', 'w') as f:
             exit 1
         fi
         "$PYTHON" -c "
-import json
+import json, os
 
-with open('$SETTINGS_FILE') as f:
+settings_file = os.path.expanduser('~/.claude/settings.json')
+
+with open(settings_file) as f:
     settings = json.load(f)
 
 hooks = settings.get('hooks', {})
@@ -411,7 +416,7 @@ for event in ['PostToolUse', 'Stop']:
 if not hooks:
     del settings['hooks']
 
-with open('$SETTINGS_FILE', 'w') as f:
+with open(settings_file, 'w') as f:
     json.dump(settings, f, indent=2)
     f.write('\n')
 "
