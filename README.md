@@ -19,7 +19,7 @@ PSG is a full-stack finance and revenue operations firm — operators, not consu
 ## Install (one command)
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/phoenixstrategy/pyre/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/phoenixstrategyresearch/pyre/main/install.sh | bash
 ```
 
 That's it. Pyre is now:
@@ -30,7 +30,7 @@ That's it. Pyre is now:
 ### Or install manually
 
 ```bash
-git clone https://github.com/phoenixstrategy/pyre.git ~/.pyre
+git clone https://github.com/phoenixstrategyresearch/pyre.git ~/.pyre
 ~/.pyre/pyre.sh install
 ```
 
@@ -112,7 +112,7 @@ Your backups live at `~/.claude/backups/`. They're gzip-compressed copies of Cla
 ## Uninstall
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/phoenixstrategy/pyre/main/uninstall.sh | bash
+curl -fsSL https://raw.githubusercontent.com/phoenixstrategyresearch/pyre/main/uninstall.sh | bash
 ```
 
 Or manually:

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # pyre-backup.sh — lightweight session crash recovery for Claude Code
-# https://github.com/phoenixstrategy/pyre
+# https://github.com/phoenixstrategyresearch/pyre
 #
 # Triggered by Claude Code hooks: PostToolUse, Stop
 # Backs up active session .jsonl files to ~/.claude/backups/

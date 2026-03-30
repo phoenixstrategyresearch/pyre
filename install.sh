@@ -4,7 +4,7 @@
 set -euo pipefail
 
 INSTALL_DIR="$HOME/.pyre"
-REPO="https://github.com/phoenixstrategy/pyre.git"
+REPO="https://github.com/phoenixstrategyresearch/pyre.git"
 
 echo ""
 echo "  Installing pyre — crash recovery for Claude Code"

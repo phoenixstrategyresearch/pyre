@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # pyre — session crash recovery CLI for Claude Code
-# https://github.com/phoenixstrategy/pyre
+# https://github.com/phoenixstrategyresearch/pyre
 #
 # Usage:
 #   pyre list                    — list all backed-up sessions
@@ -475,7 +475,7 @@ with open('$SETTINGS_FILE', 'w') as f:
     help|--help|-h|*)
         cat <<'HELP'
 pyre — session crash recovery for Claude Code
-https://github.com/phoenixstrategy/pyre
+https://github.com/phoenixstrategyresearch/pyre
 
 Usage:
   pyre install              Install backup hooks into Claude Code
