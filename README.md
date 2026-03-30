@@ -162,4 +162,24 @@ MIT — see [LICENSE](LICENSE).
 
 *From the ashes, your sessions rise.*
 
-[Phoenix Strategy Group](https://phoenixstrategy.group) | [PSG AI — Custom Agentic Systems](mailto:cruz@phoenixstrategy.group)
+---
+
+### What else PSG can do for you
+
+We built pyre because we needed it. Here's what else we do:
+
+**AI & Automation** — Custom agentic systems, private LLM deployments, AI-powered workflows. We build the stuff that actually runs in production.
+
+**Fractional CFO & FP&A** — Financial modeling, forecasting, budgeting, and strategic finance for growth-stage companies. We've been CFO to 80+ companies backed by Accel, Sequoia, and others.
+
+**M&A Advisory** — Buy-side and sell-side. 100+ transactions closed. We structured the General Assembly deal ($413M), Commissions Inc ($220M), and dozens more.
+
+**Data Engineering** — ETL pipelines, data warehouses, analytics dashboards. We get your data clean so your team (and your AI) can actually use it.
+
+**HubSpot Implementation** — Setup, migration, workflow automation, and training. Revenue ops that doesn't fall apart.
+
+Everything goes through me. One conversation, I'll figure out what you need.
+
+**Cruz Flores — cruz@phoenixstrategy.group**
+
+[phoenixstrategy.group](https://phoenixstrategy.group)
