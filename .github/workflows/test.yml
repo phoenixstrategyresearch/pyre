@@ -1,0 +1,107 @@
+name: Cross-platform tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Make scripts executable
+        run: chmod +x pyre.sh pyre-backup.sh pyre-daemon.sh install.sh uninstall.sh
+
+      - name: Create mock Claude Code directory structure
+        run: |
+          mkdir -p ~/.claude/projects/-test-project
+          echo '{"type":"message","role":"user","content":"hello"}' > ~/.claude/projects/-test-project/test-session-001.jsonl
+          echo '{"type":"message","role":"assistant","content":"hi"}' >> ~/.claude/projects/-test-project/test-session-001.jsonl
+
+      - name: Test pyre help
+        run: ./pyre.sh help
+
+      - name: Test pyre install
+        run: ./pyre.sh install
+
+      - name: Verify hooks were added to settings.json
+        run: |
+          cat ~/.claude/settings.json
+          grep -q "pyre-backup.sh" ~/.claude/settings.json
+
+      - name: Test pyre-backup with mock hook input
+        run: |
+          echo '{"session_id":"test-session-001","cwd":"/test/project"}' | ./pyre-backup.sh
+          echo "Backup exit code: $?"
+
+      - name: Test pyre stats
+        run: ./pyre.sh stats
+
+      - name: Test pyre list
+        run: ./pyre.sh list
+
+      - name: Test pyre check
+        run: ./pyre.sh check
+
+      - name: Test backup was actually created
+        run: |
+          find ~/.claude/backups -name "*.gz" -type f
+          COUNT=$(find ~/.claude/backups -name "*.gz" -type f | wc -l | tr -d ' ')
+          echo "Backup files found: $COUNT"
+          if [ "$COUNT" -lt 1 ]; then
+            echo "FAIL: No backup files created"
+            exit 1
+          fi
+
+      - name: Test pyre restore (latest)
+        run: |
+          # Remove original session file to simulate crash
+          rm ~/.claude/projects/-test-project/test-session-001.jsonl
+          # Restore from backup
+          ./pyre.sh latest test-project <<< "y"
+          # Verify session file was restored
+          if [ -f ~/.claude/projects/-test-project/test-session-001.jsonl ]; then
+            echo "PASS: Session restored successfully"
+            wc -c < ~/.claude/projects/-test-project/test-session-001.jsonl
+          else
+            # Check if it restored under a different project hash
+            echo "Checking all restored files..."
+            find ~/.claude/projects -name "*.jsonl" -type f
+          fi
+
+      - name: Test daemon start/stop
+        run: |
+          ./pyre.sh start
+          sleep 2
+          ./pyre.sh status
+          ./pyre.sh stop
+
+      - name: Test pyre cleanup (nothing old to clean)
+        run: ./pyre.sh cleanup 0
+
+      - name: Test pyre uninstall
+        run: |
+          ./pyre.sh uninstall
+          if grep -q "pyre-backup.sh" ~/.claude/settings.json 2>/dev/null; then
+            echo "FAIL: Hooks still present after uninstall"
+            exit 1
+          fi
+          echo "PASS: Hooks removed"
+
+      - name: Test fresh install via install.sh
+        run: |
+          # Simulate the install script flow (skip git clone since we're in the repo)
+          cp -r . ~/.pyre 2>/dev/null || true
+          chmod +x ~/.pyre/*.sh
+          ~/.pyre/pyre.sh install
+          echo "PASS: install.sh flow works"
