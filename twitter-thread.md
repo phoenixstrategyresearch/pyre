@@ -36,14 +36,24 @@ Took us an evening to build because we kept losing our own sessions while buildi
 
 ---
 
-**Post 4/4**
+**Post 4/5**
 
 This is the first open source drop from PSG AI at Phoenix Strategy Group.
 
-We build custom AI agents and run private LLM infrastructure for businesses — Mac Studios for small shops, tinyboxes for mid size, on-site servers and AWS for enterprise. Your data stays yours.
+We build custom AI agents and private LLM infrastructure for businesses. Mac Studios for small shops, tinyboxes for mid size, on-site servers and AWS for enterprise. Your data never leaves your walls.
 
 More tools coming. pyre was just scratching our own itch.
 
-cruz@phoenixstrategy.group if you want to talk AI.
+---
+
+**Post 5/5**
+
+PSG isn't just an AI shop. We're operators. 240+ portfolio companies, $200M+ raised, 100+ M&A deals closed.
+
+Our team helped take General Assembly from startup to $413M acquisition. Commissions Inc — $45M exit, then flipped again for $220M. Fractional CFO to 80+ companies backed by Accel and Sequoia.
+
+Finance, data, AI, M&A — all one team. If any of that's useful, hit me up.
+
+cruz@phoenixstrategy.group
 
 ---
